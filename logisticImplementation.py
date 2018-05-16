@@ -37,16 +37,16 @@ def minnTheta(theta,b,n,featureX,y):
 
 	for i in range(n):
 
-		theta=theta-0.01*partialDifTheta(theta,b,featureX,y)
-		b=b-0.01*partialDifB(theta,b,featureX,y)
+		theta=theta-0.033*partialDifTheta(theta,b,featureX,y)
+		b=b-0.033*partialDifB(theta,b,featureX,y)
 
 	#print(calculateCostFunction(theta,featureX,y)
 		allCost.append(calculateCostFunction(theta,b,featureX,y))
 		iterations.append(i)
 
-	#plt.plot(allCost,iterations)
-	#plt.show()
-
+	plt.plot(allCost,iterations)
+	plt.show()
+	return theta,b
 
 
 def partialDifB(theta,b,featureX,y):
@@ -101,11 +101,11 @@ wine = shuffle(wine)
 length=len(wine.columns)
 ToBeScaled=wine.iloc[:,:length-1]
 
-plt.plot(x_red,y_red,'*')
-plt.plot(x_white,y_white,'+')
-plt.axis('equal')
+#plt.plot(x_red,y_red,'*')
+#plt.plot(x_white,y_white,'+')
+#plt.axis('equal')
 
-plt.show()
+#plt.show()
 featureX=preprocessing.scale(ToBeScaled)
 
 y=np.array(wine['type'])
@@ -117,15 +117,15 @@ b=0
 
 
 
-#final=minnTheta(firstRandomTheta,b,5000,X_train,y_train)
+final=minnTheta(firstRandomTheta,b,5000,X_train,y_train)
 
-#finalTheta=final[0]
+finalTheta=final[0]
 
-#finalB=final[1]
+finalB=final[1]
 
-#y_pred=pred(finalTheta,finalB,X_test)
+y_pred=pred(finalTheta,finalB,X_test)
 
-#print (mean_squared_error(y_test,y_pred))
+print (mean_squared_error(y_test,y_pred))
 
 
 from sklearn.linear_model import LogisticRegression
